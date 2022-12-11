@@ -45,17 +45,32 @@ var intervalId = setInterval(update, 1000 / FPS);
 function keyDown(/** @type {KeyboardEvent}  */ e) {
     switch(e.keyCode) {
         case 37: //left arrow (move left)
-            snake.speedX = -SNAKE_SPD;
-            snake.speedY = 0;
-            break;
+            if (snake.speedX > 0){
+                break;
+            }
+            else {
+                snake.speedX = -SNAKE_SPD;
+                snake.speedY = 0;
+                break;
+            }
         case 38: // up arrow (move up)
-            snake.speedY = -SNAKE_SPD;
-            snake.speedX = 0;
-            break;
+            if (snake.speedY > 0){
+                break;
+            }
+            else {
+                snake.speedY = -SNAKE_SPD;
+                snake.speedX = 0;
+                break;
+            }
         case 39: // right arrow (move right)
-            snake.speedX = SNAKE_SPD;
-            snake.speedY = 0;
-            break;
+            if (snake.speedX < 0){
+                break;
+            }
+            else {
+                snake.speedX = SNAKE_SPD;
+                snake.speedY = 0;
+                break;
+            }
         case 40: // down arrow (move down)
             snake.speedY = SNAKE_SPD;
             snake.speedX = 0;
