@@ -9,7 +9,9 @@ const FPS = 10; // Frames per second
 const SNAKE_SPD = 20;
 const SNAKE_SIZE = 20;
 const FOOD_SIZE = 20;
-const FOOD_POINTS = 10;
+const FOOD_POINTS = 100;
+
+let isPause = false;
 
 // snake tail array
 const snakeParts = [];
@@ -38,6 +40,10 @@ class snakePart{
 
 // set up event handlers
 document.addEventListener("keydown", keyDown);
+
+//play music
+//let music = new Audio('assets/gameMusic.wav');
+
 
 // Set up game loop
 var intervalId = setInterval(update, 1000 / FPS);
@@ -72,9 +78,21 @@ function keyDown(/** @type {KeyboardEvent}  */ e) {
                 break;
             }
         case 40: // down arrow (move down)
-            snake.speedY = SNAKE_SPD;
-            snake.speedX = 0;
+            if (snake.speedY < 0){
+                break;
+            }
+            else {
+                snake.speedY = SNAKE_SPD;
+                snake.speedX = 0;
+                break;
+            }
+        case 32: // space bar (pause)
+            if (isPause){
+                isPause = false;
+            }
+            else isPause = true;
             break;
+            
     }
 }
 function isGameOver(){
@@ -99,7 +117,11 @@ function isGameOver(){
     }
 }
 
+
+
 function update() {
+
+    
 
     // draw background
     ctx.fillStyle = "black";
